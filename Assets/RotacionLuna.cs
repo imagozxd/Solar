@@ -10,15 +10,25 @@ public class RotacionLuna : MonoBehaviour
     private float anguloSen;
     private float anguloCos;
 
+    public float rangoMaximo = 360.0f;
+
     private void FixedUpdate()
     {
-        anguloSen = Mathf.Sin(Mathf.Deg2Rad * angulo * 0.5f);
+        anguloSen = Mathf.Sin(Mathf.Deg2Rad * angulo * 0.5f); 
         anguloCos = Mathf.Cos(Mathf.Deg2Rad * angulo * 0.5f);
 
         q.Set(0, anguloSen, 0, anguloCos);
 
         transform.rotation = q;
 
-        angulo -= velocidadRotacion * Time.fixedDeltaTime;
+        angulo -= velocidadRotacion * Time.deltaTime;
+
+    }
+    private void Update()
+    {        
+        if (angulo < -rangoMaximo)
+        {
+            angulo = 0.0f;
+        }
     }
 }

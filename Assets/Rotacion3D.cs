@@ -10,6 +10,8 @@ public class Rotacion3D : MonoBehaviour
     private float anguloSen;
     private float anguloCos;
 
+    public float rangoMaximo = 360.0f;
+
     private void FixedUpdate()
     {
         anguloSen = Mathf.Sin(Mathf.Deg2Rad * angulo * 0.5f);   
@@ -20,5 +22,12 @@ public class Rotacion3D : MonoBehaviour
         transform.rotation = q;
 
         angulo -= velocidadRotacion * Time.fixedDeltaTime;
+    }
+    private void Update()
+    {
+        if (angulo < -rangoMaximo)
+        {
+            angulo = 0.0f;
+        }
     }
 }
